@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const dbUrl = 'mongodb://localhost/27023';
+const dbUrl = 'mongodb://localhost:27023/khatabook';
 
 const connectDb = () => {
   return mongoose
