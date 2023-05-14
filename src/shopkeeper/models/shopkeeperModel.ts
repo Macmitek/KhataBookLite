@@ -1,6 +1,6 @@
 const shop = require("mongoose");
 
-const ShopKeeperSchema = new mongose.Schema({
+const ShopKeeperSchema = new shop.Schema({
   name: {
     type: String,
     required: true,
@@ -15,6 +15,6 @@ const ShopKeeperSchema = new mongose.Schema({
   }
 });
 
-const shopdata = mongose.model("Shopkeeper", ShopKeeperSchema);
+const shopdata = shop.model("Shopkeeper", ShopKeeperSchema);
 
 module.exports = shopdata;

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "localstart": "tsc --build && node ./lib/index.js",
     "start": "cd lib && node index.js",
-    "watch": "nodemon --watch '/src' -e ts --exec \"npm run localstart \"",
+    "watch": "nodemon --watch './src' -e ts --exec \"npm run localstart \"",
     "build": "tsc"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
     "mongoose": "^7.1.1"
   }
 }
