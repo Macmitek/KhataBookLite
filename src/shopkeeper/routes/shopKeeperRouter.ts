@@ -17,6 +17,7 @@ shopKeeperRouter.post("/postData",async (req,res) => {
   })
   
   shopKeeperRouter.get("/getData", async (request, response) => {
+    connectDb();
     const users = await shopdata.find({});
   
     try {

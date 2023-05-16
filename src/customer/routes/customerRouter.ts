@@ -17,6 +17,7 @@ customerRouter.post("/postData",async (req,res) => {
   })
   
   customerRouter.get("/getData", async (request, response) => {
+    connectDb();
     const users = await customerModel.find({});
   
     try {

@@ -1,2 +1,6 @@
 node_modules
 lib
+lib/index.d.ts
+lib/index.js
+lib/customer/models/customerModel.d.ts
+lib/customer/models/customerModel.js
