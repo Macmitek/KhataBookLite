@@ -1,11 +1,11 @@
-import * as express from 'express';
+import express from 'express';
 import { Request, Response } from 'express';
 import { config } from 'dotenv';
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
 
-import customerRouter from './../customer/routes/customerRouter';
-import shopKeeperRouter from './../shopkeeper/routes/shopKeeperRouter';
+import {customerRouter} from './../customer/routes/customerRouter';
+import {ShopKeeperRouter} from './../shopkeeper/routes/shopKeeperRouter';
 
 export class App {
   private app: express.Application;
@@ -29,11 +29,12 @@ export class App {
 
   private routes(): void {
     this.app.get('/', (req: Request, res: Response) => {
+      console.log("inside homepage")
       res.send('Home Page');
     });
 
-    this.app.use('/customer', customerRouter);
-    this.app.use('/shopkeeper', shopKeeperRouter);
+    this.app.use('/customer', new customerRouter().router);
+    this.app.use('/shopkeeper',new  ShopKeeperRouter().router);
   }
 
   public start(): void {

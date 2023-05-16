@@ -1,31 +1,39 @@
-import express = require("express");
-const connectDb = require("../../common/mongoconfig");
-const customerModel = require("../models/customerModel")
+import express, { Request, Response } from "express";
+import connectDb from "../../common/mongoconfig";
+import customerModel from "../models/customerModel";
 
-const customerRouter = express();
 
-customerRouter.post("/postData",async (req,res) => {
-    console.log("inside customer postadatda",JSON.stringify(req.body))
-    connectDb();
-    const customer = new customerModel(req.body)
-    try {
-      await customer.save();
-      res.send(customer);
-    } catch (error) {
-      res.status(500).send(error);
-    }
-  })
+
+export class customerRouter{
+  public router: express.Router;
+  public connectobj= new connectDb();
+  constructor() {
+    this.router = express.Router();
+    this.initializeRoutes();
+  }
+
+  private  initializeRoutes(): void {
+    this.router.post("/postData",async (req,res) => {
+      console.log("inside customer postadatda",JSON.stringify(req.body))
+      await connectDb.connect();
+      const customer = new customerModel(req.body)
+      try {
+        await customer.save();
+        res.send(customer);
+      } catch (error) {
+        res.status(500).send(error);
+      }
+    })
   
-  customerRouter.get("/getData", async (request, response) => {
-    connectDb();
+  this.router.get("/getData", async (request, response) => {
+    await connectDb.connect();
     const users = await customerModel.find({});
-  
-    try {
-      response.send(users);
-    } catch (error) {
-      response.status(500).send(error);
-    }
-  });
-  
-  
-export default customerRouter;
+    
+      try {
+        response.send(users);
+      } catch (error) {
+        response.status(500).send(error);
+      }
+    })
+  }
+}

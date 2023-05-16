@@ -1,20 +1,26 @@
-const shop = require("mongoose");
+import { Schema, model, Document } from "mongoose";
 
-const ShopKeeperSchema = new shop.Schema({
+interface IShopkeeper extends Document {
+  name: string;
+  phoneNo: number;
+  emailID?: string;
+}
+
+const ShopKeeperSchema = new Schema<IShopkeeper>({
   name: {
     type: String,
     required: true,
   },
-    phoneNo: {
+  phoneNo: {
     type: Number,
     required: true,
   },
-  emailID :{
-    type : String,
-    required : false
-  }
+  emailID: {
+    type: String,
+    required: false,
+  },
 });
 
-const shopdata = shop.model("Shopkeeper", ShopKeeperSchema);
+const Shopdata = model<IShopkeeper>("Shopkeeper", ShopKeeperSchema);
 
-module.exports = shopdata;
+export default Shopdata;

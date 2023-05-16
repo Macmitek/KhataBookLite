@@ -1,6 +1,10 @@
-const mongose = require("mongoose");
+import { Schema, model, Document } from "mongoose";
+interface ICustomer extends Document {
+  name: string;
+  phoneNo: number;
+}
 
-const CustomerSchema = new mongose.Schema({
+const CustomerSchema = new Schema<ICustomer>({
   name: {
     type: String,
     required: true,
@@ -11,6 +15,6 @@ const CustomerSchema = new mongose.Schema({
   }
 });
 
-const Customer = mongose.model("Customer", CustomerSchema);
+const Customer = model<ICustomer>("Customer", CustomerSchema);
 
-module.exports = Customer;
+export default Customer;
